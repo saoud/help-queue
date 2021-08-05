@@ -5,9 +5,7 @@ import TicketControl from "./TicketControl";
 
 const questionList = ["Have you gone through all the steps on the Learn How to Program debugging lesson?", "Have you asked another pair for help?", "Have you spent 15 minutes going through the problem documenting every step?"];
 
-
 class QuestionTicketControl extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -21,38 +19,42 @@ class QuestionTicketControl extends React.Component {
 
   handleClick = () => {
     if (this.state.questionOneAnswered === false) {
-      this.setState({questionOneAnswered: true})
+      this.setState({ questionOneAnswered: true })
     } else if (this.state.questionOneAnswered === true && this.state.questionTwoAnswered === false) {
-      this.setState({questionTwoAnswered: true})
+      this.setState({ questionTwoAnswered: true })
     } else if (this.state.questionOneAnswered === true && this.state.questionTwoAnswered === true && this.state.questionThreeAnswered === false) {
-      this.setState({questionThreeAnswered: true})
+      this.setState({ questionThreeAnswered: true })
     }
   }
 
   render() {
     let currentlyVisibleState = null;
-    let buttonText = null;
+    //let buttonText = null;
     let currentQuestion = null;
+    let currentButton = null; //cleaner syntax for this? 
+    //let currentHandleClick = this.handleClick;
     //const {questionThreeAnswered} = this.state;
     if (this.state.questionOneAnswered === false) {
       //Question One 
       currentQuestion = questionList[0];
-      currentlyVisibleState = <Question question={currentQuestion} />
-      buttonText = "Yes";
+      currentlyVisibleState = <Question question={currentQuestion}/>
+      //currentlyVisibleState = <Question question={currentQuestion} handleClick={currentHandleClick}/>
+      currentButton = <button onClick={this.handleClick}>Yes</button>;
     } else if (this.state.questionOneAnswered === true && this.state.questionTwoAnswered === false) {
       //Qu Two
       currentQuestion = questionList[1];
-      currentlyVisibleState = <Question question={currentQuestion} />;
-      buttonText = "Yes";
+      currentlyVisibleState = <Question question={currentQuestion}/>
+      // currentlyVisibleState = <Question question={currentQuestion} handleClick={currentHandleClick}/>;
+      currentButton = <button onClick={this.handleClick}>Yes</button>;
     } else if (this.state.questionOneAnswered === true && this.state.questionTwoAnswered === true && this.state.questionThreeAnswered === false) {
       currentQuestion = questionList[2];
-      currentlyVisibleState = <Question question={currentQuestion} />;
-      buttonText = "Yes";
+      currentlyVisibleState = <Question question={currentQuestion}/>
+      // currentlyVisibleState = <Question question={currentQuestion} handleClick={currentHandleClick}/>;
+      currentButton = <button onClick={this.handleClick}>Yes</button>;
       //Qu 3
     } else if (this.state.questionOneAnswered === true && this.state.questionTwoAnswered === true && this.state.questionThreeAnswered === true) {
       //this.setState({ questionsVisible: false });
       currentlyVisibleState = <TicketControl />;
-
     }
     // if (this.state.questionsVisible === false) {
     //   currentlyVisibleState = <TicketControl />;
@@ -61,7 +63,8 @@ class QuestionTicketControl extends React.Component {
       //if (questionThreeAnswered === false) 
       <React.Fragment>
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
+        {currentButton}
+        {/* <button onClick={this.handleClick}>{buttonText}</button> */}
       </React.Fragment>
     );
   }
