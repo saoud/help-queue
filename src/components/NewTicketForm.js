@@ -1,9 +1,24 @@
 import React from "react";
+import { v4 } from 'uuid';
 
 function NewTicketForm(props){
   return (
     <React.Fragment>
-      <h3>This is a form.</h3>
+      <form onSubmit={handleNewTicketFormSubmission}> 
+      {/* onSubmit triggers when the submit button of a form is clicked */}
+        <input
+          type='text'
+          name='names'
+          placeholder='Pair Names' />
+        <input
+          type='text'
+          name='location'
+          placeholder='Location' />
+        <textarea
+          name='issue'
+          placeholder='Describe your issue.' />
+        <button type='submit'>Help!</button>
+      </form>
     </React.Fragment>
   );
 }
